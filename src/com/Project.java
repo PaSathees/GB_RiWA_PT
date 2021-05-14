@@ -38,7 +38,7 @@ public class Project {
 			}
 			
 			//preparing HTML table output
-			output = "<table border='1'>"
+			output = "<table style='width: 100%;' class='table'>"
 					+ "<tr>"
 					+ "<th>Project Title</th>"
 					+ "<th>Project Type</th>"

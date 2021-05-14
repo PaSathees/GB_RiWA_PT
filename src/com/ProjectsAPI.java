@@ -54,14 +54,16 @@ public class ProjectsAPI extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map params = getParamsAsMap(request);
 		
-		String output = projectObj.updateProject(params.get("projectID").toString(),
+		String output = projectObj.updateProject(params.get("hiddenProjectIDSave").toString(),
 													params.get("projectTitle").toString(),
 													params.get("projectType").toString(),
 													params.get("projectDesc").toString(),
 													params.get("projectBudget").toString(),
 													params.get("unitCost").toString(),
 													params.get("username").toString(),
-													params.get("password").toString());				
+													params.get("password").toString());	
+		
+		
 				
 		response.getWriter().write(output);
 	}

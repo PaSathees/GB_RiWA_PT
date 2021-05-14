@@ -8,13 +8,13 @@
 <title>Projects Management | GadgetBadget</title>
 <link rel="stylesheet" href="Views/bootstrap.min.css">
 <script src="Components/jquery-3.2.1.min.js"></script>
-<script src="Components/Items.js"></script>
+<script src="Components/Projects.js"></script>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-6">
-				<h1>Projects Management : GadgetBadget</h1>
+			<div class="col-10">
+				<h1 style="margin-top: 30px; margin-bottom: 30px;">Projects Management : GadgetBadget</h1>
 				<form id="formProject" name="formItem">
 					Project Title: <input id="projectTitle" name="projectTitle" type="text"
 								class="form-control form-control-sm">
@@ -42,9 +42,11 @@
 					<input type="hidden" id="hiddenProjectIDSave" name="hiddenProjectIDSave" value="">
 				</form>
 				
-				<div id="alertSuccess" class="alert alert-success"></div>
-				<div id="alertError" class="alert alert-danger"></div>
+				<div id="alertSuccess" class="alert alert-success" style="margin-top: 30px;"></div>
+				<div id="alertError" class="alert alert-danger" style="margin-top: 30px;"></div>
 				<br>
+				
+				
 
 				<div id="divProjectsGrid">
 					<%

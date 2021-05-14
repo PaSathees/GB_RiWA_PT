@@ -36,14 +36,14 @@ $(document).on("click", "#btnSave", () => {
 		type : type, 
 		data : $("#formProject").serialize(), 
 		dataType : "text", 
-		complete : (response, status) => {
+		complete : function(response, status) {
     					onProjectSaveComplete(response.responseText, status);
 					}
 	});
 });
 
 //Update button handler______________________________
-$(document).on("click", ".btnUpdate", () => {     
+$(document).on("click", ".btnUpdate", function() {     
 	$("#hiddenProjectIDSave").val($(this).data("projectid"));  
 	$("#projectTitle").val($(this).closest("tr").find('td:eq(0)').text());     
 	$("#projectType").val($(this).closest("tr").find('td:eq(1)').text());     
@@ -55,7 +55,7 @@ $(document).on("click", ".btnUpdate", () => {
 });
 
 //Delete button handler______________________________
-$(document).on("click", ".btnRemove", () => {
+$(document).on("click", ".btnRemove", function() {
 	$.ajax( {
 		url : "ProjectsAPI", 
 		type : "DELETE", 
@@ -130,8 +130,10 @@ validateProjectForm = () => {
 	return true;
 }
 
-onProjectSaveComplete = (response, status) => {
+onProjectSaveComplete = (response, status) => {	
+	
 	if (status == "success") {
+		console.log(response);
 		
 		const resultSet = JSON.parse(response);
 		
@@ -144,7 +146,7 @@ onProjectSaveComplete = (response, status) => {
 			$("#alertError").show();
 		}
 	} else if (status == "error") {
-		$("#alertError").text("Error while saving project]"); 
+		$("#alertError").text("Error while saving project"); 
 		$("#alertError").show();
 	} else {
 		$("#alertError").text("Unknown error while saving project.."); 
@@ -157,6 +159,8 @@ onProjectSaveComplete = (response, status) => {
 
 
 onProjectDeleteComplete = (response, status) => {
+
+	
 	if (status == "success") {
 		
 		const resultSet = JSON.parse(response);
