@@ -38,8 +38,14 @@ public class ProjectsAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String output = projectObj.createProject(request.getParameter("projectTitle"), 
+												request.getParameter("projectType"),	
+												request.getParameter("projectDesc"),	
+												request.getParameter("projectBudget"),	
+												request.getParameter("unitCost"),
+												request.getParameter("username"),
+												request.getParameter("password"));
+		response.getWriter().write(output);
 	}
 
 	/**
