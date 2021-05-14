@@ -155,3 +155,26 @@ onProjectSaveComplete = (response, status) => {
 	$("#formProject")[0].reset();
 }
 
+
+onProjectDeleteComplete = (response, status) => {
+	if (status == "success") {
+		
+		const resultSet = JSON.parse(response);
+		
+		if (resultSet.status.trim() == "success") {
+			$("#alertSuccess").text("Project successfully deleted"); 
+			$("#alertSuccess").show();
+			$("#divProjectsGrid").html(resultSet.data);
+		} else if (resultSet.status.trim() == "error") {
+			$("#alertError").text(resultSet.data); 
+			$("#alertError").show();
+		}
+		
+	} else if (status == "error") {
+		$("#alertError").text("Error while deleting project"); 
+		$("#alertError").show();
+	} else {
+		$("#alertError").text("Unknown error while deleting project.."); 
+		$("#alertError").show();
+	}
+}
