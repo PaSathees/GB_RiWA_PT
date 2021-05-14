@@ -25,6 +25,8 @@ public class Project {
 	}
 	
 	public String readProjects() {
+		//modified to read all projects in the system
+		
 		String output = "";
 		
 		try {
@@ -106,20 +108,26 @@ public class Project {
 					preparedStatement.setInt(6, userID);					
 					
 					preparedStatement.execute();
-					output = "Project inserted successfully";					
+					
+					String newProjects = readProjects();
+					output = "{\"status\":\"success\", "
+							+ "\"data\": \"" + newProjects + "\"}";			
 					
 				} else {
-					output = "You are not authorized to insert Project";
+					output = "{\"status\":\"error\", "
+							+ "\"data\":\"You are not authorized to insert Project.\"}";					
 				}
 				
 			} else {
-				output = "you are not authenticated";
+				output = "{\"status\":\"error\", "
+						+ "\"data\":\"you are not authenticated\"}";				
 			}	
 			
 			connection.close();
 			
 		} catch (Exception e) {
-			output = "Error inserting project";
+			output = "{\"status\":\"error\", "
+					+ "\"data\":\"Error inserting project\"}";			
 			System.err.println(e.getMessage());
 		}
 		
@@ -200,6 +208,7 @@ public class Project {
 	}
 	
 	public String deleteProject(String projectID) {
+		//removed authentication as client doesn't has a authentication function
 		String output = "";
 		
 		try {
