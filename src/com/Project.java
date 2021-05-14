@@ -271,15 +271,20 @@ public class Project {
 				preparedStatement2.setInt(1, Integer.parseInt(projectID));							
 				
 				preparedStatement2.execute();
-				output = "Project deleted successfully";				
+				
+				String newProjects = readProjects();
+				output = "{\"status\":\"success\", "
+						+ "\"data\": \"" + newProjects + "\"}";					
 			} else {
-				output = "Project does not exist";
+				output = "{\"status\":\"error\", "
+						+ "\"data\":\"Project does not exist\"}";				
 			}			
 			
 			connection.close();
 			
 		} catch (Exception e) {
-			output = "Error deleting project";
+			output = "{\"status\":\"error\", "
+					+ "\"data\":\"Error deleting project\"}";			
 			System.err.println(e.getMessage());
 		}
 		
