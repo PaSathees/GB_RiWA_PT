@@ -104,3 +104,29 @@ validateProjectForm = () => {
 	
 	return true;
 }
+
+onProjectSaveComplete = (response, status) => {
+	if (status == "success") {
+		
+		const resultSet = JSON.parse(response);
+		
+		if (resultSet.status.trim() == "success") {
+			$("#alertSuccess").text("Project successfully saved."); 
+			$("#alertSuccess").show();
+			$("#divProjectsGrid").html(resultSet.data);
+		} else if (resultSet.status.trim() == "error") {
+			$("#alertError").text(resultSet.data); 
+			$("#alertError").show();
+		}
+	} else if (status == "error") {
+		$("#alertError").text("Error while saving project]"); 
+		$("#alertError").show();
+	} else {
+		$("#alertError").text("Unknown error while saving project.."); 
+		$("#alertError").show();
+	}
+	
+	$("#hiddenProjectIDSave").val(""); 
+	$("#formProject")[0].reset();
+}
+
