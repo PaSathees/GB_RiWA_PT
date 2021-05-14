@@ -108,7 +108,8 @@ public class Project {
 			Connection connection = this.connect();
 			
 			if (connection == null) {
-				return "Error connecting to project database";
+				return "{\"status\":\"error\", "
+						+ "\"data\":\"Error connecting to project database\"}";
 			}
 			
 			//check if it authenticated
@@ -172,7 +173,8 @@ public class Project {
 			Connection connection = this.connect();
 			
 			if (connection == null) {
-				return "Error connecting to project database";
+				return "{\"status\":\"error\", "
+						+ "\"data\":\"Error connecting to project database\"}";
 			}
 			
 			//check if it authenticated
@@ -205,26 +207,35 @@ public class Project {
 							preparedStatement2.setInt(6, Integer.parseInt(projectID));							
 							
 							preparedStatement2.execute();
-							output = "Project updated successfully";					
+							
+							String newProjects = readProjects();
+							output = "{\"status\":\"success\", "
+									+ "\"data\": \"" + newProjects + "\"}";			
+							
 						} else {
-							output = "You are not the inventor of this Project";
+							output = "{\"status\":\"error\", "
+									+ "\"data\":\"You are not the inventor of this Project\"}";							
 						}
 					} else {
-						output = "Project does not exist";
+						output = "{\"status\":\"error\", "
+								+ "\"data\":\"Project does not exist\"}";						
 					}				
 					
 				} else {
-					output = "You are not an inventor";
+					output = "{\"status\":\"error\", "
+							+ "\"data\":\"You are not an inventor\"}";					
 				}
 				
 			} else {
-				output = "You are not authenticated";
+				output = "{\"status\":\"error\", "
+						+ "\"data\":\"You are not authenticated\"}";				
 			}	
 			
 			connection.close();
 			
 		} catch (Exception e) {
-			output = "Error updating project";
+			output = "{\"status\":\"error\", "
+					+ "\"data\":\"Error updating project\"}";			
 			System.err.println(e.getMessage());
 		}
 		
@@ -241,7 +252,8 @@ public class Project {
 			Connection connection = this.connect();
 			
 			if (connection == null) {
-				return "Error connecting to project database";
+				return "{\"status\":\"error\", "
+						+ "\"data\":\"Error connecting to project database\"}";
 			}
 								
 			//check whether user is the inventor of the Project						
