@@ -70,7 +70,11 @@ public class ProjectsAPI extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Map params = getParamsAsMap(request);
+		
+		String output = projectObj.deleteProject(params.get("projectID").toString());				
+				
+		response.getWriter().write(output);
 	}
 	
 	// To Convert request parameters to a Map 
