@@ -35,16 +35,27 @@ public class Project {
 			
 			if (connection == null) {
 				return "Error connecting to project database";
-			}					
+			}
+			
+			//preparing HTML table output
+			output = "<table border='1'>"
+					+ "<tr>"
+					+ "<th>Project Title</th>"
+					+ "<th>Project Type</th>"
+					+ "<th>Project Description</th>"
+					+ "<th>Project Budget</th>"
+					+ "<th>Unit Cost</th>"
+					+ "<th>Update</th>"
+					+ "<th>Remove</th>"
+					+ "</tr>";
 					
 			//creating prepared statement for reading
 			String query = "select * from Project";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			
 			//binding values to prepared statement				
-			ResultSet rs = preparedStatement.executeQuery();	
-			
-			output = "[";
+			ResultSet rs = preparedStatement.executeQuery();		
+
 			
 			while (rs.next()) {
 				String dbProjectID = Integer.toString(rs.getInt("projectID"));
@@ -54,18 +65,32 @@ public class Project {
 				String projectBudget = Double.toString(rs.getDouble("projectBudget"));
 				String unitCost = Integer.toString(rs.getInt("unitCost"));
 				
+				//adding retrieved values to the output table
+				output += "<tr>"
+						+ "<td>" + projectTitle + "</td>"; 
+				output += "<td>" + projectType + "</td>"; 
+				output += "<td>" + projectDesc + "</td>"; 
+				output += "<td>" + projectBudget + "</td>"; 
+				output += "<td>" + unitCost + "</td>"; 
 				
-				output += "{\"ProjectID\":\"" + dbProjectID + "\", \"ProjectTitle\":\"" + projectTitle +"\", "
-						+ "\"ProjectType\":\"" + projectType + "\", \"ProjectDesc\":\"" + projectDesc + "\", "
-						+ "\"ProjectBudget\":\"" + projectBudget + "\", \"UnitCost\":\"" + unitCost + "\"},";
-			}				
-			
-			output += "]";		 		
+				//adding buttons to output table 
+				output += "<td>"
+						+ "<input name='btnUpdate' type='button' value='Update' "
+						+ "class='btnUpdate btn btn-secondary' data-projectid='" + dbProjectID + "'>"
+						+ "</td>" 
+						+ "<td>"
+						+ "<input name='btnRemove' type='button' value='Remove' " 
+						+ "class='btnRemove btn btn-danger' data-projectid='" + dbProjectID + "'>"
+						+ "</td>"
+						+ "</tr>";				
+				
+			}	 		
 				
 			connection.close();
+			output += "</table>";
 			
 		} catch (Exception e) {
-			output = "Error reading project";
+			output = "Error reading projects";
 			System.err.println(e.getMessage());
 		}
 		
