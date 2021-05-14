@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-6">
 				<h1>Projects Management : GadgetBadget</h1>
-				<form id="formItem" name="formItem">
+				<form id="formProject" name="formItem">
 					Project Title: <input id="projectTitle" name="projectTitle" type="text"
 								class="form-control form-control-sm">
 					<br> 
