@@ -19,7 +19,7 @@ $(document).on("click", "#btnSave", () => {
 	$("#alertError").hide();
 	
 	// Validating the project form
-	var status = validateItemForm(); 
+	const status = validateProjectForm(); 
 	
 	//if validation is failed	
 	if (status != true) {
@@ -29,7 +29,7 @@ $(document).on("click", "#btnSave", () => {
 	}
 	
 	// If validation passed
-	var type = ($("#hiddenProjectIDSave").val() == "") ? "POST" : "PUT";
+	const type = ($("#hiddenProjectIDSave").val() == "") ? "POST" : "PUT";
 	
 	$.ajax( {
 		url : "ProjectsAPI", 
@@ -41,3 +41,66 @@ $(document).on("click", "#btnSave", () => {
 					}
 	});
 });
+
+
+//Client Model==================================================
+validateProjectForm = () => {
+	//Project title 
+	if ($("#projectTitle").val().trim() == "") {
+		return "Insert Project Title";
+	}
+	
+	//Project type 
+	if ($("#projectType").val().trim() == "") {
+		return "Insert Project Type";
+	}
+	
+	//Project description 
+	if ($("#projectDesc").val().trim() == "") {
+		return "Insert Project Description";
+	}
+	
+	//Project budget 
+	if ($("#projectBudget").val().trim() == "") {
+		return "Insert Project Budget";
+	}
+	
+	
+	// is project budget a numerical value 
+	const projectBudget = $("#projectBudget").val().trim(); 
+	
+	if (!$.isNumeric(projectBudget)) {
+		return "Insert a numerical value for Project Budget";
+	}
+	
+	// convert project budget to a decimal value
+	$("#projectBudget").val(parseFloat(projectBudget).toFixed(2));
+	
+	
+	//Unit cost 
+	if ($("#unitCost").val().trim() == "") {
+		return "Insert Unit Cost";
+	}
+	
+	// is unit cost a numerical value 
+	const unitCost = $("#unitCost").val().trim(); 
+	
+	if (!$.isNumeric(unitCost)) {
+		return "Insert a numerical value for Unit Cost";
+	}
+	
+	// convert unit cost to decimal value
+	$("#unitCost").val(parseFloat(unitCost).toFixed(2));
+	
+	//Inventor username
+	if ($("#username").val().trim() == "") {
+		return "Insert Inventor Username";
+	}
+	
+	//Inventor password 
+	if ($("#password").val().trim() == "") {
+		return "Insert Inventor Password";
+	}	
+	
+	return true;
+}
