@@ -52,7 +52,18 @@ public class ProjectsAPI extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Map params = getParamsAsMap(request);
+		
+		String output = projectObj.updateProject(params.get("projectID").toString(),
+													params.get("projectTitle").toString(),
+													params.get("projectType").toString(),
+													params.get("projectDesc").toString(),
+													params.get("projectBudget").toString(),
+													params.get("unitCost").toString(),
+													params.get("username").toString(),
+													params.get("password").toString());				
+				
+		response.getWriter().write(output);
 	}
 
 	/**
