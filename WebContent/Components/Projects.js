@@ -54,6 +54,19 @@ $(document).on("click", ".btnUpdate", () => {
 	$("#password").val($(this).closest("tr").find('td:eq(6)').text()); 
 });
 
+//Delete button handler______________________________
+$(document).on("click", ".btnRemove", () => {
+	$.ajax( {
+		url : "ProjectsAPI", 
+		type : "DELETE", 
+		data : "projectID=" + $(this).data("projectid"), 
+		dataType : "text", 
+		complete : (response, status) => {
+						onProjectDeleteComplete(response.responseText, status);
+					}
+	});
+});
+
 
 //Client Model==================================================
 validateProjectForm = () => {
