@@ -9,7 +9,7 @@ $(document).ready(() => {
 	} $("#alertError").hide();
 });
 
-//Save projects handler______________________________
+//Save button handler______________________________
 $(document).on("click", "#btnSave", () => {
 	
 	//hidding alerts/successes if any
@@ -40,6 +40,18 @@ $(document).on("click", "#btnSave", () => {
     					onProjectSaveComplete(response.responseText, status);
 					}
 	});
+});
+
+//Update button handler______________________________
+$(document).on("click", ".btnUpdate", () => {     
+	$("#hiddenProjectIDSave").val($(this).data("projectid"));  
+	$("#projectTitle").val($(this).closest("tr").find('td:eq(0)').text());     
+	$("#projectType").val($(this).closest("tr").find('td:eq(1)').text());     
+	$("#projectDesc").val($(this).closest("tr").find('td:eq(2)').text());     
+	$("#projectBudget").val($(this).closest("tr").find('td:eq(3)').text()); 
+	$("#unitCost").val($(this).closest("tr").find('td:eq(4)').text()); 
+	$("#username").val($(this).closest("tr").find('td:eq(5)').text()); 
+	$("#password").val($(this).closest("tr").find('td:eq(6)').text()); 
 });
 
 
